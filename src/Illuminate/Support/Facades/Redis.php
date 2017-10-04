@@ -3,9 +3,9 @@
 namespace Illuminate\Support\Facades;
 
 /**
- * @method static \Illuminate\Redis\Connections\Connection connection(string | null $name) Get a Redis connection by name.
- * @method static \Illuminate\Redis\Connections\Connection resolve(string | null $name) Resolve the given connection by name.
- * @method static array connections() Return all of the created connections.
+ * @method static \Illuminate\Redis\Connections\Connection connection(string | null $name)
+ * @method static \Illuminate\Redis\Connections\Connection resolve(string | null $name)
+ * @method static array connections()
  *
  * @see \Illuminate\Redis\RedisManager
  * @see \Illuminate\Contracts\Redis\Factory

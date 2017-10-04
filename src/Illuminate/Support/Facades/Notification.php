@@ -7,15 +7,15 @@ use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Testing\Fakes\NotificationFake;
 
 /**
- * @method static void send(\Illuminate\Support\Collection | array | mixed $notifiables, mixed $notification) Send the given notification to the given notifiable entities.
- * @method static void sendNow(\Illuminate\Support\Collection | array | mixed $notifiables, mixed $notification, array | null $channels) Send the given notification immediately.
- * @method static mixed channel(string | null $name) Get a channel instance.
- * @method static string getDefaultDriver() Get the default channel driver name.
- * @method static string deliversVia() Get the default channel driver name.
- * @method static void deliverVia(string $channel) Set the default channel driver name.
- * @method static mixed driver(string $driver) Get a driver instance.
- * @method static $this extend(string $driver, \Closure $callback) Register a custom driver creator Closure.
- * @method static array getDrivers() Get all of the created "drivers".
+ * @method static void send(\Illuminate\Support\Collection | array | mixed $notifiables, mixed $notification)
+ * @method static void sendNow(\Illuminate\Support\Collection | array | mixed $notifiables, mixed $notification, array | null $channels)
+ * @method static mixed channel(string | null $name)
+ * @method static string getDefaultDriver()
+ * @method static string deliversVia()
+ * @method static void deliverVia(string $channel)
+ * @method static mixed driver(string $driver)
+ * @method static $this extend(string $driver, \Closure $callback)
+ * @method static array getDrivers()
  *
  * @see \Illuminate\Notifications\ChannelManager
  */
