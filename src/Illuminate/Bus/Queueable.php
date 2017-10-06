@@ -99,46 +99,4 @@ trait Queueable
             }));
         }
     }
-/**
-
-public function dispatchNextJobInChain()
-{
-if (! empty($this->chained)) {
-dispatch(tap(unserialize(array_shift($this->chained)), function (Queueable $next) {
-$next->chained = $this->chained;
-$next->onConnection($next->connection ?: $this->connection);
-$next->onQueue($next->queue ?: $this->queue);
-}));
-}
-}
- *
- * all on queue or all on connection implies that you cannot override the behavior.
-maybe withChain should have optional parameters for queue and connection.
-These would be the default for the chain, unless the chained job is already defined.
-These params can then be passed down through the chain.
-
-```php
-protected $chain_connection=null;
-protected $chain_queue=null;
-
-/**
- * Set the jobs that should run if this job is successful.
- *
- * @param  array  $chain
- * @param  null|string  $queue
- * @param  null|string  $connection
- * @return \Illuminate\Foundation\Bus\PendingChain
- * /
-public static function withChain(array $chain,string $queue=null,string $connection=null)
-{
-    $this->chain_queue = $queue;
-    $this->chain_connection = $connection;
-    return new PendingChain(get_called_class(), $chain);
-}
-
-/// example
-JobA::withChain( [a,b,c], 'QueueName', 'ConnectionName');
-```
-
-     */
 }
