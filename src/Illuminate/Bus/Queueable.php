@@ -94,7 +94,7 @@ trait Queueable
     public function dispatchNextJobInChain()
     {
         if (! empty($this->chained)) {
-            dispatch(tap(unserialize(array_shift($this->chained)), function (Queueable $next) {
+            dispatch(tap(unserialize(array_shift($this->chained)), function ($next) {
                 $next->chained = $this->chained;
             }));
         }
