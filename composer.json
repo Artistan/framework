@@ -1,12 +1,12 @@
 {
-    "name": "Artistan/laravel-framework",
+    "name": "laravel-doc-block-framework",
     "description": "The DocBlocked Laravel Framework.",
     "keywords": ["static","docblocks","framework", "laravel"],
     "license": "MIT",
-    "homepage": "https://github.com/Artistan/laravel-framework",
+    "homepage": "https://github.com/laravel-doc-block-framework",
     "support": {
-        "issues": "https://github.com/Artistan/laravel-framework/issues",
-        "source": "https://github.com/Artistan/laravel-framework"
+        "issues": "https://github.com/laravel-doc-block-framework/issues",
+        "source": "https://github.com/laravel-doc-block-framework"
     },
     "authors": [
         {
