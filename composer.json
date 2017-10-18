@@ -1,12 +1,12 @@
 {
-    "name": "laravel-doc-block-framework",
+    "name": "laraframe-docblock",
     "description": "The DocBlocked Laravel Framework.",
     "keywords": ["static","docblocks","framework", "laravel"],
     "license": "MIT",
-    "homepage": "https://github.com/laravel-doc-block-framework",
+    "homepage": "https://github.com/laraframe-docblock",
     "support": {
-        "issues": "https://github.com/laravel-doc-block-framework/issues",
-        "source": "https://github.com/laravel-doc-block-framework"
+        "issues": "https://github.com/laraframe-docblock/issues",
+        "source": "https://github.com/laraframe-docblock"
     },
     "authors": [
         {

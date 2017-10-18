@@ -2,10 +2,18 @@
 
 I will attempt to keep the doc blocks up to date, specifically for PhpStorm.
 
-```php
- {
- 
- }
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Artistan/laraframe-docblock"
+        }
+    ],
+    "require": {
+        "laravel/framework": "docblock-methods"
+    }
+}
 
 ```
 
