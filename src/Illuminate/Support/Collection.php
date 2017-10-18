@@ -34,7 +34,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     protected static $proxies = [
         'average', 'avg', 'contains', 'each', 'every', 'filter', 'first', 'flatMap',
-        'map', 'partition', 'reject', 'sortBy', 'sortByDesc', 'sum',
+        'keyBy', 'map', 'partition', 'reject', 'sortBy', 'sortByDesc', 'sum',
     ];
 
     /**
@@ -854,6 +854,25 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     }
 
     /**
+     * Run a dictionary map over the items.
+     *
+     * The callback should return an associative array with a single key/value pair.
+     *
+     * @param  callable  $callback
+     * @return static
+     */
+    public function mapToDictionary(callable $callback)
+    {
+        $dictionary = $this->map($callback)->reduce(function ($groups, $pair) {
+            $groups[key($pair)][] = reset($pair);
+
+            return $groups;
+        }, []);
+
+        return new static($dictionary);
+    }
+
+    /**
      * Run a grouping map over the items.
      *
      * The callback should return an associative array with a single key/value pair.
@@ -863,13 +882,9 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function mapToGroups(callable $callback)
     {
-        $groups = $this->map($callback)->reduce(function ($groups, $pair) {
-            $groups[key($pair)][] = reset($pair);
+        $groups = $this->mapToDictionary($callback);
 
-            return $groups;
-        }, []);
-
-        return (new static($groups))->map([$this, 'make']);
+        return $groups->map([$this, 'make']);
     }
 
     /**
@@ -1040,7 +1055,9 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function forPage($page, $perPage)
     {
-        return $this->slice(($page - 1) * $perPage, $perPage);
+        $offset = max(0, ($page - 1) * $perPage);
+
+        return $this->slice($offset, $perPage);
     }
 
     /**

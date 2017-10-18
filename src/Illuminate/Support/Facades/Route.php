@@ -3,6 +3,7 @@
 namespace Illuminate\Support\Facades;
 
 /**
+ *
  * @method static \Illuminate\Support\Facades\Route get(string $uri, \Closure | array | string | null $action = null)
  * @method static \Illuminate\Support\Facades\Route post(string $uri, \Closure | array | string | null $action = null)
  * @method static \Illuminate\Support\Facades\Route put(string $uri, \Closure | array | string | null $action = null)
@@ -17,7 +18,7 @@ namespace Illuminate\Support\Facades;
  * @method static void resources(array $resources)
  * @method static \Illuminate\Routing\PendingResourceRegistration resource(string $name, string $controller, array $options = [])
  * @method static \Illuminate\Routing\PendingResourceRegistration apiResource(string $name, string $controller, array $options = [])
- * @method static void group(string $callback)
+ * @method static \Illuminate\Routing\Route group(\Closure|string|array $value)
  * @method static array mergeWithLastGroup(array $new)
  * @method static string getLastGroupPrefix()
  * @method static \Illuminate\Http\Response|\Illuminate\Http\JsonResponse dispatch(\Illuminate\Http\Request $request)
