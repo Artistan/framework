@@ -1,17 +1,21 @@
 {
-    "name": "laravel/framework",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "Artistan/laravel-framework",
+    "description": "The DocBlocked Laravel Framework.",
+    "keywords": ["static","docblocks","framework", "laravel"],
     "license": "MIT",
-    "homepage": "https://laravel.com",
+    "homepage": "https://github.com/Artistan/laravel-framework",
     "support": {
-        "issues": "https://github.com/laravel/framework/issues",
-        "source": "https://github.com/laravel/framework"
+        "issues": "https://github.com/Artistan/laravel-framework/issues",
+        "source": "https://github.com/Artistan/laravel-framework"
     },
     "authors": [
         {
             "name": "Taylor Otwell",
             "email": "taylor@laravel.com"
+        },
+        {
+            "name": "Charles Peterson",
+            "email": "cpeterson@artistan.org"
         }
     ],
     "require": {
