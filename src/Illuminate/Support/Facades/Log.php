@@ -7,13 +7,14 @@ use Psr\Log\LoggerInterface;
 /**
  * @see \Illuminate\Log\Writer
  *
+ * @method static boolean debug($message, $context = array())
  * @method static boolean info($message, $context = array())
  * @method static boolean notice($message, $context = array())
  * @method static boolean warning($message, $context = array())
  * @method static boolean error($message, $context = array())
  * @method static boolean critical($message, $context = array())
  * @method static boolean alert($message, $context = array())
- * @method static boolean eme rgency($message, $context = array())
+ * @method static boolean emergency($message, $context = array())
  * @method static void log($level, $message, $context = array())
  * @method static void write($level, $message, $context = array())
  * @method static void useFiles($path, $level = 'debug')
