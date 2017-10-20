@@ -140,9 +140,6 @@ trait Queueable
     {
         if (! empty($this->chained)) {
             dispatch(tap(unserialize(array_shift($this->chained)), function ($next) {
-                if (! in_array('Illuminate\Bus\Queueable', class_uses_recursive($next))) {
-                    throw new \Exception('Trying to dispatch an object that is not Queueable');
-                }
                 $next->onChainConnection($next->chainConnection ?: $this->chainConnection);
                 $next->onChainQueue($next->chainQueue ?: $this->chainQueue);
                 $next->chained = $this->chained;

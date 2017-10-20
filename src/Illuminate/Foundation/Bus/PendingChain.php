@@ -30,7 +30,7 @@ class PendingChain
      *
      * @var string|null
      */
-    public $chain_queue;
+    public $chainQueue;
 
     /**
      * Create a new PendingChain instance.
