@@ -1,5 +1,87 @@
 # Release Notes for 5.5.x
 
+## [Unreleased]
+
+### Added
+- Added `response()` and `download()` methods to file system ([#22089](https://github.com/laravel/framework/pull/22089))
+
+### Changed
+- Updated depreciated `MailFake::queue()` method signature ([#22072](https://github.com/laravel/framework/pull/22072))
+- Use `MEDIUMTEXT` instead of `TEXT` for database cache values (MySQL only) ([#22091](https://github.com/laravel/framework/pull/22091))
+- Include the name of the scheduled job in the output email subject ([#22098](https://github.com/laravel/framework/pull/22098))
+- Support `Dblib` version config for SQL Server ([#22102](https://github.com/laravel/framework/pull/22102))
+- Set `Model::$exists` to `false` when force-deleting a model using `SoftDeletes` ([#22100](https://github.com/laravel/framework/pull/22100))
+- Support empty strings in `HasAttributes::fromDateTime()` ([#22108](https://github.com/laravel/framework/pull/22108))
+
+### Fixed
+- Fixed `HasManyThrough` relation with custom intermediate and local keys when used in `whereHas()` ([#22071](https://github.com/laravel/framework/pull/22071), [3788cbd](https://github.com/laravel/framework/commit/3788cbd3e606caa4a6e4137f92709c85e52b2cf3))
+- Fixed SQL Server handling of `DATETIME` columns ([#22052](https://github.com/laravel/framework/pull/22052))
+- Return default value from `old()` when session isn't available ([#22082](https://github.com/laravel/framework/pull/22082))
+- Refactor `Arr::flatten()` to prevent performance issue ([#22103](https://github.com/laravel/framework/pull/22103))
+- Wrap MySQL JSON keys are in double quotes when updating JSON columns ([#22118](https://github.com/laravel/framework/pull/22118))
+
+
+## v5.5.21 (2017-11-14)
+
+### Added
+- Add support for `MultiSubnetFailover` parameter to SqlServer ([#22022](https://github.com/laravel/framework/pull/22022))
+- Support custom URLs for S3 ([#22037](https://github.com/laravel/framework/pull/22037))
+- Added `MakesHttpRequests::withMiddleware()` method ([#22060](https://github.com/laravel/framework/pull/22060))
+
+### Changed
+- Display controller name in `BadMethodCallException` ([#22005](https://github.com/laravel/framework/pull/22005))
+- Unify `Collection::dd()` and `Collection::dump()` output ([#22036](https://github.com/laravel/framework/pull/22036))
+- Support event generation from multiple service providers ([#22063](https://github.com/laravel/framework/pull/22063))
+
+
+## v5.5.20 (2017-11-07)
+
+### Added
+- Added `TestResponse::assertJsonMissingExact()` ([#21881](https://github.com/laravel/framework/pull/21881))
+- Added `assertValidationErrors()` and `assertJsonCount()` to `TestResponse` ([#21917](https://github.com/laravel/framework/pull/21917))
+- Added `allOnQueue()` and `allOnConnection()` for job chaining ([#21765](https://github.com/laravel/framework/pull/21765))
+- Support variadic arguments on fluent `Route::middleware()` ([#21930](https://github.com/laravel/framework/pull/21930))
+- Added precision to `Blueprint::time()` ([#21936](https://github.com/laravel/framework/pull/21936))
+- Added `Router::apiResources()` method ([#21956](https://github.com/laravel/framework/pull/21956))
+- Support graceful handling of `SIGTERM` in queue workers ([#21964](https://github.com/laravel/framework/pull/21964))
+
+### Changed
+- Added "kin" as an uncountable word ([#21843](https://github.com/laravel/framework/pull/21843))
+- Improved geo spatial support ([#21919](https://github.com/laravel/framework/pull/21919))
+- Include job name in the `MaxAttemptsExcededException` ([#21941](https://github.com/laravel/framework/pull/21941), [#21943](https://github.com/laravel/framework/pull/21943))
+- Support rendering multiple `@verbatim` and `@php` blocks ([#21900](https://github.com/laravel/framework/pull/21900))
+- Moved `InteractsWithRedis` to `Illuminate\Foundation\Testing` ([#21967](https://github.com/laravel/framework/pull/21967))
+- Don't bind macro when it is not a `Closure` ([#21980](https://github.com/laravel/framework/pull/21980))
+- Check for `before()` method on policies classes ([#21989](https://github.com/laravel/framework/pull/21989))
+- Detect lost pgbouncer connections ([#21988](https://github.com/laravel/framework/pull/21988))
+
+### Fixed
+- Fixed `BroadcastController` namespace issue ([#21844](https://github.com/laravel/framework/pull/21844))
+- Fixed eager loading `HasManyThrough` relations with custom intermediate and local key ([#21902](https://github.com/laravel/framework/pull/21902))
+- Use table aliases when calling self-referencing `HasManyThrough` relation ([#21883](https://github.com/laravel/framework/pull/21883))
+- Fixed Vue component file name in React present ([#21945](https://github.com/laravel/framework/pull/21945))
+- Reverted changes to `BadMethodException` in [#20196](https://github.com/laravel/framework/pull/20196) ([#21929](https://github.com/laravel/framework/pull/21929))
+
+
+## v5.5.19 (2017-10-25)
+
+### Added
+- Added `MakesHttpRequests::followingRedirects()` method ([#21771](https://github.com/laravel/framework/pull/21771))
+- Added `MakesHttpRequests::from()` method ([#21788](https://github.com/laravel/framework/pull/21788))
+- Added `notifyNow()` method to notifiables ([#21795](https://github.com/laravel/framework/pull/21795))
+- Added `TestResponse::assertCookieExpired()` method ([#21793](https://github.com/laravel/framework/pull/21793))
+- Added `TestResponse::assertCookieMissing()` method ([#21803](https://github.com/laravel/framework/pull/21803))
+
+### Changed
+- Allow the distinct validation rule to optionally ignore case ([#21757](https://github.com/laravel/framework/pull/21757))
+
+### Fixed
+- Excluding `spatial_ref_sys` table from `migrate:fresh` ([#21778](https://github.com/laravel/framework/pull/21778))
+- Fixed issue with `SessionGuard` setting the logged in user after firing the `Authenticated` event ([#21790](https://github.com/laravel/framework/pull/21790))
+- Fixed issue with `Model::refresh()` when model has a global scope ([#21815](https://github.com/laravel/framework/pull/21815))
+- Fixed scheduling a non-queuable job ([#21820](https://github.com/laravel/framework/pull/21820))
+
+
 ## v5.5.18 (2017-10-19)
 
 ### Added
