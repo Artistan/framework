@@ -8,6 +8,13 @@ use Illuminate\Database\Schema\Blueprint;
 class SqlServerGrammar extends Grammar
 {
     /**
+     * If this Grammar supports schema changes wrapped in a transaction.
+     *
+     * @var bool
+     */
+    protected $transactions = true;
+
+    /**
      * The possible column modifiers.
      *
      * @var array
@@ -748,5 +755,20 @@ class SqlServerGrammar extends Grammar
         if (in_array($column->type, $this->serials) && $column->autoIncrement) {
             return ' identity primary key';
         }
+    }
+
+    /**
+     * Wrap a table in keyword identifiers.
+     *
+     * @param  \Illuminate\Database\Query\Expression|string  $table
+     * @return string
+     */
+    public function wrapTable($table)
+    {
+        if ($table instanceof Blueprint && $table->temporary) {
+            $this->setTablePrefix('#');
+        }
+
+        return parent::wrapTable($table);
     }
 }
