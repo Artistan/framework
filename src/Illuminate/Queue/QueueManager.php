@@ -3,6 +3,7 @@
 namespace Illuminate\Queue;
 
 use Closure;
+use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 use Illuminate\Contracts\Queue\Factory as FactoryContract;
 use Illuminate\Contracts\Queue\Monitor as MonitorContract;
@@ -152,6 +153,9 @@ class QueueManager implements FactoryContract, MonitorContract
     protected function resolve($name)
     {
         $config = $this->getConfig($name);
+        if(empty($config['driver'])){
+            Log::error($name,[$config]);//exit;
+        }
 
         return $this->getConnector($config['driver'])
                         ->connect($config)
