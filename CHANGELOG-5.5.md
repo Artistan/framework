@@ -3,10 +3,52 @@
 ## [Unreleased]
 
 ### Added
+- Added support for Flysystem caching ([#22310](https://github.com/laravel/framework/pull/22310), [0657496](https://github.com/laravel/framework/commit/06574964c677c4205668def84ede22e3ca5eee9c))
+
+
+## v5.5.24 (2017-12-06)
+
+### Added
+- Added `WithFaker` testing trait ([#22280](https://github.com/laravel/framework/pull/22280), [4841089](https://github.com/laravel/framework/commit/4841089645e1772e64b501a4f69478b2ee7f4550), [5c72698](https://github.com/laravel/framework/commit/5c726986ae1ecb926ae9d77e28848bb38d020041))
+
+### Changed
+- Made `Relation::$morphMap` public ([e44596f](https://github.com/laravel/framework/commit/e44596f65667962af69fd9cd9e63beb927fecaa1))
+- Trim return value of `ValidatesAttributes::shouldBlockPhpUpload()` ([90a8faf](https://github.com/laravel/framework/commit/90a8fafd6b70d8f059e86010de996c5db6da4c37))
+
+### Fixed
+- Fixed an issue with queueable notifications ([#22275](https://github.com/laravel/framework/pull/22275))
+- Fixed `NullSessionDriver` upstream issues ([#22314](https://github.com/laravel/framework/pull/22314))
+- Move `payload` to the end of the insert array of a job ([#22334](https://github.com/laravel/framework/pull/22334))
+
+
+## v5.5.23 (2017-12-04)
+
+### Added
+- Added a `Collection::firstWhere()` method ([#22261](https://github.com/laravel/framework/pull/22261), [#22264](https://github.com/laravel/framework/pull/22264))
+- Added several accessors to `BelongsToMany` ([f09ea98](https://github.com/laravel/framework/commit/f09ea98bc814c708215896dad702d715923f3bc3), [cbe8123](https://github.com/laravel/framework/commit/cbe8123a479e81779cd85251eb4a5cf861e93ea3), [3bcf9d1](https://github.com/laravel/framework/commit/3bcf9d1d67ca3f288270e910898c77334322128a))
+
+### Changed
+- Pass test value to `Collection::when()` callbacks ([#22224](https://github.com/laravel/framework/pull/22224))
+- Support worker sleep time of less than 1s ([#22246](https://github.com/laravel/framework/pull/22246), [#22255](https://github.com/laravel/framework/pull/22255))
+- Detect persistent connection resets ([#22277](https://github.com/laravel/framework/pull/22277))
+- Support chaining seeders ([#22288](https://github.com/laravel/framework/pull/22288))
+
+### Fixed
+- Fixed negative comparison to objects in `Collection::where()` ([#22256](https://github.com/laravel/framework/pull/22256))
+- Fixed comparing strings with objects that can be casted to string in `Collection::where()` ([#22295](https://github.com/laravel/framework/pull/22295))
+- Fixed integer validation using `distinct:ignore_case` ([#22235](https://github.com/laravel/framework/pull/22235))
+- Fixes building nested JSON accessors in `MySqlGrammar` ([#22254](https://github.com/laravel/framework/pull/22254))
+- Remove `SELECT` bindings from MySQL delete statements ([#22285](https://github.com/laravel/framework/pull/22285))
+
+
+## v5.5.22 (2017-11-27)
+
+### Added
 - Added `response()` and `download()` methods to file system ([#22089](https://github.com/laravel/framework/pull/22089))
 - Added complete temporary table support ([#22110](https://github.com/laravel/framework/pull/22110))
 - Added `Mode::newQueryForRestoration()` method ([#22119](https://github.com/laravel/framework/pull/22119))
 - Added precision support for date/time columns ([#22122](https://github.com/laravel/framework/pull/22122))
+- Added detection for MySQL Galera deadlocks ([#22214](https://github.com/laravel/framework/pull/22214))
 
 ### Changed
 - Updated depreciated `MailFake::queue()` method signature ([#22072](https://github.com/laravel/framework/pull/22072))
@@ -18,13 +60,15 @@
 - Return condition from `throw_*` helpers ([#22149](https://github.com/laravel/framework/pull/22149))
 - Make `Collection::where()` independent of error reporting ([#22172](https://github.com/laravel/framework/pull/22172))
 - Show more meaningful message when json translation file contains errors ([#22165](https://github.com/laravel/framework/pull/22165), [cf29b88](https://github.com/laravel/framework/commit/cf29b884006a4ce4d84a115b531143337a875211))
+- Improve `Model::getTable()` performance ([#22222](https://github.com/laravel/framework/pull/22222))
+- Use transaction in migrations using SQL Server ([#22187](https://github.com/laravel/framework/pull/22187))
 
 ### Fixed
 - Fixed `HasManyThrough` relation with custom intermediate and local keys when used in `whereHas()` ([#22071](https://github.com/laravel/framework/pull/22071), [3788cbd](https://github.com/laravel/framework/commit/3788cbd3e606caa4a6e4137f92709c85e52b2cf3))
 - Fixed SQL Server handling of `DATETIME` columns ([#22052](https://github.com/laravel/framework/pull/22052))
 - Return default value from `old()` when session isn't available ([#22082](https://github.com/laravel/framework/pull/22082))
 - Refactor `Arr::flatten()` to prevent performance issue ([#22103](https://github.com/laravel/framework/pull/22103))
-- Wrap MySQL JSON keys are in double quotes when updating JSON columns ([#22118](https://github.com/laravel/framework/pull/22118))
+- Wrap MySQL JSON keys in double quotes when updating JSON columns ([#22118](https://github.com/laravel/framework/pull/22118))
 - Fixed custom URLs with prefix (`root`) for AWS storage ([#22130](https://github.com/laravel/framework/pull/22130))
 - Prevent authentication if `password` is the only specified field ([#22167](https://github.com/laravel/framework/pull/22167))
 
