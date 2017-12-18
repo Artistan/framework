@@ -24,11 +24,13 @@ class Notification extends Facade
     /**
      * Replace the bound instance with a fake.
      *
-     * @return void
+     * @return \Illuminate\Support\Testing\Fakes\NotificationFake
      */
     public static function fake()
     {
-        static::swap(new NotificationFake);
+        static::swap($fake = new NotificationFake);
+
+        return $fake;
     }
 
     /**
