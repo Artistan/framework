@@ -5,8 +5,6 @@ namespace Illuminate\Support\Facades;
 use Psr\Log\LoggerInterface;
 
 /**
- * @see \Illuminate\Log\Writer
- *
  * @method static boolean debug($message, $context = array())
  * @method static boolean info($message, $context = array())
  * @method static boolean notice($message, $context = array())
@@ -25,6 +23,10 @@ use Psr\Log\LoggerInterface;
  * @method static \Monolog\Logger getMonolog()
  * @method static \Illuminate\Contracts\Events\Dispatcher getEventDispatcher()
  * @method static void setEventDispatcher($dispatcher)
+ *
+ *
+ *
+ * @see \Illuminate\Log\Logger
  */
 class Log extends Facade
 {
