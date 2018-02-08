@@ -562,6 +562,12 @@ class ValidationValidatorTest extends TestCase
         $this->assertFalse($v->passes());
         $v->messages()->setFormat(':message');
         $this->assertEquals('require it please!', $v->messages()->first('name'));
+
+        $trans = $this->getIlluminateArrayTranslator();
+        $v = new Validator($trans, ['name' => 'foobarba'], ['name' => 'size:9'], ['size' => ['string' => ':attribute should be of length :size']]);
+        $this->assertFalse($v->passes());
+        $v->messages()->setFormat(':message');
+        $this->assertEquals('name should be of length 9', $v->messages()->first('name'));
     }
 
     public function testInlineValidationMessagesAreRespectedWithAsterisks()
@@ -1875,6 +1881,7 @@ class ValidationValidatorTest extends TestCase
             ['rtsp://fully.qualified.domain/path'],
             ['rtsps://fully.qualified.domain/path'],
             ['rtspu://fully.qualified.domain/path'],
+            ['s3://fully.qualified.domain/path'],
             ['secondlife://fully.qualified.domain/path'],
             ['service://fully.qualified.domain/path'],
             ['session://fully.qualified.domain/path'],

@@ -330,6 +330,16 @@ class SupportCollectionTest extends TestCase
         $this->assertEquals(['id1' => 'first', 'id2' => 'second'], $c->keyBy->id->map->name->all());
     }
 
+    public function testHigherOrderUnique()
+    {
+        $c = new Collection([
+            ['id' => '1', 'name' => 'first'],
+            ['id' => '1', 'name' => 'second'],
+        ]);
+
+        $this->assertCount(1, $c->unique->id);
+    }
+
     public function testHigherOrderFilter()
     {
         $c = new Collection([
@@ -973,11 +983,15 @@ class SupportCollectionTest extends TestCase
 
         $this->assertEquals(['first' => 'Taylor'], $data->except(['last', 'email', 'missing'])->all());
         $this->assertEquals(['first' => 'Taylor'], $data->except('last', 'email', 'missing')->all());
-        $this->assertEquals(['first' => 'Taylor'], $data->except(collect(['last' => 'Otwell', 'email' => 'taylorotwell@gmail.com', 'missing']))->all());
 
         $this->assertEquals(['first' => 'Taylor', 'email' => 'taylorotwell@gmail.com'], $data->except(['last'])->all());
         $this->assertEquals(['first' => 'Taylor', 'email' => 'taylorotwell@gmail.com'], $data->except('last')->all());
-        $this->assertEquals(['first' => 'Taylor', 'email' => 'taylorotwell@gmail.com'], $data->except(collect(['last' => 'Otwell']))->all());
+    }
+
+    public function testExceptSelf()
+    {
+        $data = new Collection(['first' => 'Taylor', 'last' => 'Otwell']);
+        $this->assertEquals(['first' => 'Taylor', 'last' => 'Otwell'], $data->except($data)->all());
     }
 
     public function testPluckWithArrayAndObjectValues()
@@ -998,6 +1012,15 @@ class SupportCollectionTest extends TestCase
         $this->assertEquals(['foo', 'bar'], $data->pluck('email')->all());
     }
 
+    public function testHas()
+    {
+        $data = new Collection(['id' => 1, 'first' => 'Hello', 'second' => 'World']);
+        $this->assertTrue($data->has('first'));
+        $this->assertFalse($data->has('third'));
+        $this->assertTrue($data->has(['first', 'second']));
+        $this->assertFalse($data->has(['third', 'first']));
+    }
+
     public function testImplode()
     {
         $data = new Collection([['name' => 'taylor', 'email' => 'foo'], ['name' => 'dayle', 'email' => 'bar']]);
@@ -1014,6 +1037,20 @@ class SupportCollectionTest extends TestCase
         $data = new Collection(['taylor', 'dayle', 'shawn']);
         $data = $data->take(2);
         $this->assertEquals(['taylor', 'dayle'], $data->all());
+    }
+
+    public function testPut()
+    {
+        $data = new Collection(['name' => 'taylor', 'email' => 'foo']);
+        $data = $data->put('name', 'dayle');
+        $this->assertEquals(['name' => 'dayle', 'email' => 'foo'], $data->all());
+    }
+
+    public function testPutWithNoKey()
+    {
+        $data = new Collection(['taylor', 'shawn']);
+        $data = $data->put(null, 'dayle');
+        $this->assertEquals(['taylor', 'shawn', 'dayle'], $data->all());
     }
 
     public function testRandom()
@@ -1601,6 +1638,48 @@ class SupportCollectionTest extends TestCase
         $this->assertEquals($expected_result, $result->toArray());
     }
 
+    public function testGroupByMultiLevelAndClosurePreservingKeys()
+    {
+        $data = new Collection([
+            10 => ['user' => 1, 'skilllevel' => 1, 'roles' => ['Role_1', 'Role_3']],
+            20 => ['user' => 2, 'skilllevel' => 1, 'roles' => ['Role_1', 'Role_2']],
+            30 => ['user' => 3, 'skilllevel' => 2, 'roles' => ['Role_1']],
+            40 => ['user' => 4, 'skilllevel' => 2, 'roles' => ['Role_2']],
+        ]);
+
+        $result = $data->groupBy([
+            'skilllevel',
+            function ($item) {
+                return $item['roles'];
+            },
+        ], true);
+
+        $expected_result = [
+            1 => [
+                'Role_1' => [
+                    10 => ['user' => 1, 'skilllevel' => 1, 'roles' => ['Role_1', 'Role_3']],
+                    20 => ['user' => 2, 'skilllevel' => 1, 'roles' => ['Role_1', 'Role_2']],
+                ],
+                'Role_3' => [
+                    10 => ['user' => 1, 'skilllevel' => 1, 'roles' => ['Role_1', 'Role_3']],
+                ],
+                'Role_2' => [
+                    20 => ['user' => 2, 'skilllevel' => 1, 'roles' => ['Role_1', 'Role_2']],
+                ],
+            ],
+            2 => [
+                'Role_1' => [
+                    30 => ['user' => 3, 'skilllevel' => 2, 'roles' => ['Role_1']],
+                ],
+                'Role_2' => [
+                    40 => ['user' => 4, 'skilllevel' => 2, 'roles' => ['Role_2']],
+                ],
+            ],
+        ];
+
+        $this->assertEquals($expected_result, $result->toArray());
+    }
+
     public function testKeyByAttribute()
     {
         $data = new Collection([['rating' => 1, 'name' => '1'], ['rating' => 2, 'name' => '2'], ['rating' => 3, 'name' => '3']]);
@@ -1928,9 +2007,11 @@ class SupportCollectionTest extends TestCase
         $this->assertEquals($data->all(), $data->only(null)->all());
         $this->assertEquals(['first' => 'Taylor'], $data->only(['first', 'missing'])->all());
         $this->assertEquals(['first' => 'Taylor'], $data->only('first', 'missing')->all());
+        $this->assertEquals(['first' => 'Taylor'], $data->only(collect(['first', 'missing']))->all());
 
         $this->assertEquals(['first' => 'Taylor', 'email' => 'taylorotwell@gmail.com'], $data->only(['first', 'email'])->all());
         $this->assertEquals(['first' => 'Taylor', 'email' => 'taylorotwell@gmail.com'], $data->only('first', 'email')->all());
+        $this->assertEquals(['first' => 'Taylor', 'email' => 'taylorotwell@gmail.com'], $data->only(collect(['first', 'email']))->all());
     }
 
     public function testGettingAvgItemsFromCollection()
@@ -2421,6 +2502,12 @@ class SupportCollectionTest extends TestCase
         });
 
         $this->assertSame(['michael', 'tom', 'taylor'], $collection->toArray());
+    }
+
+    public function testGetWithNullReturnsNull()
+    {
+        $collection = new Collection([1, 2, 3]);
+        $this->assertNull($collection->get(null));
     }
 }
 

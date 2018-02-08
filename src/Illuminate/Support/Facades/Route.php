@@ -12,13 +12,10 @@ namespace Illuminate\Support\Facades;
  * @method static \Illuminate\Support\Facades\Route options(string $uri, \Closure | array | string | null $action = null)
  * @method static \Illuminate\Support\Facades\Route any(string $uri, \Closure | array | string | null $action = null)
  * @method static \Illuminate\Support\Facades\Route fallback(\Closure | array | string | null $action = null)
- * @method static \Illuminate\Support\Facades\Route redirect(string $uri, string $destination, int $status = 301)
- * @method static \Illuminate\Support\Facades\Route view(string $uri, string $view, array $data = [])
  * @method static \Illuminate\Support\Facades\Route match(array | string $methods, string $uri, \Closure | array | string | null $action = null)
  * @method static void resources(array $resources)
  * @method static \Illuminate\Routing\PendingResourceRegistration resource(string $name, string $controller, array $options = [])
  * @method static \Illuminate\Routing\PendingResourceRegistration apiResource(string $name, string $controller, array $options = [])
- * @method static \Illuminate\Routing\Route group(\Closure|string|array $value)
  * @method static array mergeWithLastGroup(array $new)
  * @method static string getLastGroupPrefix()
  * @method static \Illuminate\Http\Response|\Illuminate\Http\JsonResponse dispatch(\Illuminate\Http\Request $request)
@@ -26,7 +23,6 @@ namespace Illuminate\Support\Facades;
  * @method static array gatherRouteMiddleware(\Illuminate\Support\Facades\Route $route)
  * @method static \Illuminate\Http\Response|\Illuminate\Http\JsonResponse prepareResponse(\Symfony\Component\HttpFoundation\Request $request, mixed $response)
  * @method static \Illuminate\Http\Response|\Illuminate\Http\JsonResponse toResponse(\Symfony\Component\HttpFoundation\Request $request, mixed $response) static version substituteBindings(\Illuminate\Support\Facades\Route $route)
- * @method static void substituteImplicitBindings(\Illuminate\Support\Facades\Route $route)
  * @method static void matched(string | callable $callback)
  * @method static array getMiddleware()
  * @method static $this aliasMiddleware(string $name, string $class)
@@ -71,6 +67,10 @@ namespace Illuminate\Support\Facades;
  * @method static \Illuminate\Support\Facades\Route domain(string $value)
  * @method static \Illuminate\Support\Facades\Route name(string $value)
  * @method static \Illuminate\Support\Facades\Route namespace(string $value)
+ * @method static \Illuminate\Support\Facades\Route where(array|string $name, string $expression = null)
+ * @method static \Illuminate\Routing\Router group(\Closure|string|array $value)
+ * @method static \Illuminate\Support\Facades\Route redirect(string $uri, string $destination, int $status = 301)
+ * @method static \Illuminate\Support\Facades\Route view(string $uri, string $view, array $data = [])
  *
  * @see \Illuminate\Routing\Router
  * @see \Illuminate\Routing\Route
